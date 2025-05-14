@@ -6,10 +6,17 @@ pipeline {
     }
     
     stages {
-        stage('Git Checkout') {
+        stage('Git Checkout') 
             steps {
                 git branch: 'main', url: 'https://github.com/Nasreenshaik267/CICD-Pipleine.git'
             }
         }
-    }
+    
+    stage('Versioning') {
+            steps {
+                script {
+                sh 'mvn versions:set -DnewVersion=1.0.${BUILD_NUMBER}'
+                }
+            }
+}
 }
