@@ -8,8 +8,17 @@ pipeline {
     stages {
         stage('Git Checkout') 
             steps {
-                git branch: 'main', url: 'https://github.com/Nasreenshaik267/CICD-Pipleine.git'
+                
+               git branch: 'main', changelog: false, credentialsId: '12345', poll: false, url: 'https://github.com/Nasreenshaik267/CICD-Pipleine'
+            }
             }
         }
+    stages('maven compile') {
+       steps {
+        echo 'maven compile started'
+        sh 'mvn compile'
+      }
+    }
+
     
-}
+
